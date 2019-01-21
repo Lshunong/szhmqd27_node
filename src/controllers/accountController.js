@@ -110,6 +110,7 @@ exports.login = (req,res)=>{
 
     //2.验证码验证
     if(vcode != req.session.vcode){
+        //修改status
         result.status =1
         result.message = '验证码错误'
 
@@ -118,8 +119,10 @@ exports.login = (req,res)=>{
     }
 
     //3.验证用户名和密码
-    //先判断数据库中用户名和密码，是否存在，如果存在返回提示 (mongodb)
-    MongoClient.connect(url, 
+    //先判断数据库中用户名，是否存在，如果存在返回提示 (mongodb)
+    MongoClient.connect(
+        url,
+        {useNewUrlParser:true}, 
         function(err, client) {
 
         //拿到db
@@ -128,13 +131,13 @@ exports.login = (req,res)=>{
         const collection = db.collection('accountInfo');
         //查询一个
         collection.findOne({username,password},(err,doc)=>{
-            if(doc == null){//没查询到
+            if(!doc){//没查询到
                 result.status = 2
                 result.message = "用户名或密码错误"
               }else{
                 req.session.loginedName = username
               }
-
+              client.close()
               res.json(result)
         })
         

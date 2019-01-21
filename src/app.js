@@ -14,12 +14,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Use the session middleware 解析数字验证码图片路径 放入session
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}))
-
+//app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}))
+app.use(session({ secret: 'keyboard cat',resave:false,saveUninitialized:false, cookie: { maxAge: 600000 }}))
 //进行登录请求判断
 
 
-//设置静态资源根目录
+//设置静态资源 根目录
 app.use(express.static(path.join(__dirname,'public')))
 
 

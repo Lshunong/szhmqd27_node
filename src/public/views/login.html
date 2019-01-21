@@ -35,6 +35,7 @@
                                 <input type="text" class="form-control" name="vcode" id="vcodeId" placeholder="请输入验证码">
                             </div>
                             <div class="col-sm-3">
+                                <!-- 页面发送请求--发送到app.js -->
                                 <img id="vcodeimgId" src="/account/vcode">
                             </div>
                         </div>
@@ -62,12 +63,19 @@
     //登录
     function login(){
         const username = $("#usernameId").val()
-        const password = $.md5($("#passwordId").val()+"DZH!@#love")
+        const password = $.md5($("#passwordId").val()+"!@&_1231")
         const vcode = $("#vcodeId").val()
+        //提交
+        /* 
+        参数一:url
+        参数二:参数
+        参数三:回调函数
+        */
         $.post('/account/login',{username,password,vcode},function(data){
             if(data.status != 0){
                 alert(data.message)
-                $("#vcodeimgId").attr('src', "/account/vcode?random="+Math.random())
+                //刷新验证码
+                $("#vcodeimgId").attr('src',`/account/vcode?aaa=${Math.random()}`)
             } else {
                 window.location.href = "/studentmanager/list"
             }
