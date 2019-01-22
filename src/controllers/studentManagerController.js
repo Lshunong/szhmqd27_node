@@ -19,7 +19,11 @@ const getStudentListPage =(req,res)=>{
         // 这个里面的代码，是当databasetool中findMany执行了callback
         // callback中会把 err,docs传递过来
         // 渲染页面的代码 
-        const html = template(path.join(__dirname,"../public/views/list.html"),{students:docs,keyword});
+        const html = template(path.join(__dirname,"../public/views/list.html"),{
+            students:docs,
+            keyword,
+            loginedName:req.session.loginedName
+        });
         //返回浏览器页面
         res.send(html);
     })
@@ -33,7 +37,9 @@ const getStudentListPage =(req,res)=>{
  */
 const getAddStudentPage = (req,res) =>{
     // 渲染页面的代码 
-    const html = template(path.join(__dirname,"../public/views/add.html"),{});
+    const html = template(path.join(__dirname,"../public/views/add.html"),{
+        loginedName:req.session.loginedName
+    });
     //返回浏览器页面
     res.send(html);
 }
@@ -55,6 +61,7 @@ const getEditStudentPage = (req,res)=>{
     // 必须按照它mongodb规定的处理，你才能拿到数据
     const _id=databasetool.ObjectId(req.params.studentId);
     databasetool.findYige('studentInfo',{_id},(err,doc)=>{
+        doc.loginedName=req.session.loginedName
         //根据数据  重新渲染得到新页面
         const html = template(path.join(__dirname,"../public/views/edit.html"),doc);
         //返回浏览器页面

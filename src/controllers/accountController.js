@@ -112,6 +112,8 @@ exports.login = (req,res)=>{
         if(!dos){//没查询到
             result.status = 2
             result.message = "用户名或密码错误"
+          }else{//登录成功 把登录之后的名字存在session 判断权限的时候用到
+            req.session.loginedName = username
           }
           //返回json数据
           res.json(result)
