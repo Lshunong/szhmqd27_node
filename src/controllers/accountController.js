@@ -120,3 +120,12 @@ exports.login = (req,res)=>{
     })
 
 }
+
+//处理注销操作
+exports.logout=(req,res)=>{
+    //1.清空session中的用户名
+    req.session.loginedName= null
+
+    //2.浏览器跳转到登录页面
+    res.send('<script>location.href="/account/login"</script>')
+}

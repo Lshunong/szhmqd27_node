@@ -56,9 +56,10 @@ const findYige = (collectionName,data,callback)=>{
         const collection = db.collection(collectionName);
         //调用mongodb的findOne方法
         collection.findOne(data,(err,doc)=>{
+            //console.log(doc)这是根据id获取到的内容
             //关闭数据库
             client.close();
-            //执行回调函数   传递结果给控制器
+            //执行回调函数   传递结果给控制器   并渲染到页面
             callback(err,doc)
         })       
     });

@@ -22,5 +22,8 @@ accountRouter.get('/vcode',accountController.getVcodeImage)
 //处理登录请求  并写个login方法传给控制器
 accountRouter.post('/login',accountController.login)
 
+//退出注销注销操作
+accountRouter.get('/logout',accountController.logout)
+
 //导出路由对象
 module.exports =accountRouter
