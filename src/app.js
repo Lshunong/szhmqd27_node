@@ -26,8 +26,10 @@ app.use(express.static(path.join(__dirname,'public')))
 
 //导入路由对象 路由中间件写在最后
 const accountRouter =require(path.join(__dirname,'./routers/accountRouter.js'))
+const studentManagerRouter =require(path.join(__dirname,'./routers/studentManagerRouter.js'))
 //一级路径account
 app.use('/account',accountRouter)
+app.use('/studentmanager',studentManagerRouter)
 
 //启动
 app.listen(3000,'127.0.0.1',err=>{

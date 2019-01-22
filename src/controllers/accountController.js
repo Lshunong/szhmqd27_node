@@ -1,5 +1,7 @@
-
+//导包
 const path = require('path')
+//导入自己封装的包
+const databasetool = require(path.join(__dirname, "../tools/databasetool.js"));
 const MongoClient = require("mongodb").MongoClient;
 //验证码第三方包
 const captchapng = require('captchapng')
@@ -90,7 +92,8 @@ exports.getVcodeImage=(req,res)=>{
     p.color(80, 80, 80, 255); // Second color: paint (red, green, blue, alpha)
 
     var img = p.getBase64();
-    var imgbase64 = new Buffer(img,'base64');
+    var imgbase64 = Buffer.from(img, "base64");
+    //var imgbase64 = new Buffer(img,'base64');
     res.writeHead(200, {
         'Content-Type': 'image/png'
     });
@@ -138,6 +141,7 @@ exports.login = (req,res)=>{
                 req.session.loginedName = username
               }
               client.close()
+              //返回json数据
               res.json(result)
         })
         

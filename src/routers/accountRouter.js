@@ -9,7 +9,7 @@ const path = require('path')
 const accountRouter = express.Router()
 
 //导入控制器模块
-const accountController = require(path.join(__dirname,'../controllers/accountController'))
+const accountController = require(path.join(__dirname,'../controllers/accountController.js'))
 
 //MVC 获取注册页面
 accountRouter.get('/register',accountController.getRegisterPage)

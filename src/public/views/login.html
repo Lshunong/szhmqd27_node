@@ -55,8 +55,9 @@
     </div>
 </body>
 <script>
+    //验证码点击刷新
     $("#vcodeimgId").click(function(){
-
+        //点一次发送请求一次
         $("#vcodeimgId").attr('src',`/account/vcode?aaa=${Math.random()}`)
     })
 
