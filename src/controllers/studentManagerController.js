@@ -3,9 +3,14 @@ const path = require("path");
 const template = require("art-template");
 const databasetool = require(path.join(__dirname,"../tools/databasetool.js"))
 
-
+/**
+ * 返回列表页面
+ * 参数:
+ * @param {*} req
+ * @param {*} res
+ */
 const getStudentListPage =(req,res)=>{
-    //判断获取 搜索输入的内容
+    //判断获取搜索输入的内容  如果没有传递默认给空值
     const keyword = req.query.keyword || ''
     console.log(req.query.keyword)
 

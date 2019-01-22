@@ -61,7 +61,7 @@
         $("#vcodeimgId").attr('src',`/account/vcode?aaa=${Math.random()}`)
     })
 
-    //登录
+    //登录 获取用户输入的信息 并对密码加密
     function login(){
         const username = $("#usernameId").val()
         const password = $.md5($("#passwordId").val()+"!@&_1231")
@@ -72,6 +72,7 @@
         参数二:参数
         参数三:回调函数
         */
+       //发送请求
         $.post('/account/login',{username,password,vcode},function(data){
             if(data.status != 0){
                 alert(data.message)

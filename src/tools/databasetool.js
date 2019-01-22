@@ -89,7 +89,7 @@ const findMany = (collectionName,data,callback)=>{
     });
 }
 //const  定义
-//导出
+//导出方法  给控制器调用
 module.exports ={
     insertSingle,
     findYige,

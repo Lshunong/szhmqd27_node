@@ -11,7 +11,7 @@ const studentManagerController = require(path.join(
     __dirname,'../controllers/studentManagerController.js'))
 
 
-//处理请求 获取列表页面
+//处理get请求 调用控制器的getStudentListPage方法获取列表页面
 studentManagerRouter.get("/list",studentManagerController.getStudentListPage)
 
 //导出
