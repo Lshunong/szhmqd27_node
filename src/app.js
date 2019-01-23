@@ -1,17 +1,20 @@
 //导包
 const express = require('express')
 const path = require('path')
-var bodyParser = require('body-parser')
+//var bodyParser = require('body-parser')
 var session = require('express-session')
+//自己写的包
+var querystring = require('querystring')
+
 
 //创建app
 const app = express()
 
 // parse application/x-www-form-urlencoded 解析url
-app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json 解析json
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
 
 // Use the session middleware 解析数字验证码图片路径 放入session
 //app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 600000 }}))
@@ -35,6 +38,21 @@ app.all('/*',(req,res,next)=>{
     }
 })
 
+//自己手写解析中间件
+app.use('/*',(req,res,next)=>{
+    if(req.method === 'POST'){//post
+        let body = ''
+        req.on('data',chunk=>{
+            body +=chunk
+        })
+        req.on('end',()=>{
+            req.body = querystring.parse(body)
+            next()
+        })
+    }else{//get
+        next()
+    }
+})
 
 //导入路由对象 路由中间件写在最后
 const accountRouter =require(path.join(__dirname,'./routers/accountRouter.js'))
